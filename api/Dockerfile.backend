@@ -1,0 +1,20 @@
+FROM node:18
+
+RUN npm install -g npm@latest
+
+WORKDIR /app
+
+COPY ["package.json", "./"]
+
+RUN npm cache clean -f
+
+RUN npm install -g nodemon
+RUN npm install -g bcryptjs
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3500
+
+CMD ["nodemon", "npm", "start"]
